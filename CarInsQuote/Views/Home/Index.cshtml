@@ -1,0 +1,54 @@
+﻿<div class="jumbotron">
+    <h5 class="jabtitle">Jabroni Insurance</h5>
+    <p class="lead">Taking the fall so you don't have to!</p>
+</div>
+
+<div class="row no-gutters m-3">
+    <div class="card col-sm-12 col-md-10 col-lg-6 mx-auto shadow">
+        <div class="calctitle card-header text-center">
+            <h4 class="m-0">Get a quick quote now by entering your information below!</h4>
+        </div>
+        <div class="card-body">
+            @using (Html.BeginForm("CalculateQuote", "Home", FormMethod.Post))
+            {
+                <div class="row" id="infoSheet">
+                    <div class="form-group col-md-12">
+                        <input name="FirstName" type="text" class="form-control" placeholder="First Name" />
+                    </div>
+                    <div class="form-group col-md-12">
+                        <input name="LastName" type="text" class="form-control" placeholder="Last Name" />
+                    </div>
+                    <div class="form-group col-md-12">
+                        <input name="EmailAddress" type="email" class="form-control" placeholder="E-Mail Address" />
+                    </div>
+                    <div class="form-group col-md-12">
+                        <input name="DateOfBirth" type="number" class="form-control" placeholder="Year You Were Born: (YYYY)" />
+                    </div>
+                    <div class="form-group col-md-12">
+                        <input name="CarYear" type="number" class="form-control" placeholder="Car Model Year (YYYY)" />
+                    </div>
+                    <div class="form-group col-md-12">
+                        <input name="CarMake" type="text" class="form-control" placeholder="Car Make" />
+                    </div>
+                    <div class="form-group col-md-12">
+                        <input name="CarModel" type="text" class="form-control" placeholder="Car Model" />
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label> Any DUIs?</label>
+                        <label><input name="DUI" type="radio" value="No" checked />   NO </label>
+                        <label><input name="DUI" type="radio" value="Yes" />  YES </label>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <input name="SpeedingTicket" type="number" class="form-control" placeholder="Enter number of speeding tickets, if any. If none, enter '0'." />
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label><input name="CoverageType" type="radio" value="Full" checked />    Full Insurance</label>
+                        <label><input name="CoverageType" type="radio" value="Liability" />    Liability Insurance</label>
+                    </div>
+                    <button type="submit" class="btn btn-block btn-success" onclick="calculateQuote" >Calculate My Quote!</button>
+                    <button type="reset" class="btn btn-block btn-warning">Clear Form</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
