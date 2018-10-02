@@ -65,7 +65,7 @@ namespace CarInsQuote.Controllers
                     command.ExecuteNonQuery();
                     connection.Close();
                 }
-                return View("QuotationView"); //Not working at the moment due to not having the Quote included.
+                return View("QuotationView"); //Not working at the moment due to not having any Quote value entered.
             }
         }
         public ActionResult Admin()
