@@ -1,14 +1,21 @@
-﻿
-@{
-    ViewBag.Title = "QuotationView";
-}
+﻿@using CarInsQuote.Models
+@model List<Insuree>
 
 <h2>QuotationView</h2>
 
 <p class="quote-text">Based on the information you gave us, we could be covering you for: </p>
-<br/>
+<br />
+<div class="card-body">
+    @foreach (var insuree in Model)
+    {
+        <div class="row">
+            <div class="col">
+                @insuree.Quote
+            </div>
+        </div>
+    }
 
-@Html.TextBox("QuotationTotal") <!--Figure out how to show a figure between paragraphs-->
+</div>
 
-<br/>
+<br />
 <p class="quote-text">For more information, please contact your nearest agent!</p>
