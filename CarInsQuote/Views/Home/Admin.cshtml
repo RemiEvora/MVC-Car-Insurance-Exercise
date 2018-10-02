@@ -1,0 +1,54 @@
+﻿@using CarInsQuote.Models
+@model List <Insuree>
+
+<div class="row no-gutters m-3">
+    <div class="card col-sm-12 col-md-10 col-lg-6 mx-auto shadow">
+        <div class="calctitle card-header text-center">
+            <h4 class="m-0">Customer Quotes</h4>
+        </div>
+        <div class="card-body">
+            @foreach (var insuree in Model)
+                {
+                    <div class="row">
+                        <div class="col">
+                            @insuree.Id
+                        </div>
+                        <div class="col">
+                            @insuree.FirstName
+                        </div>
+                        <div class="col">
+                            @insuree.LastName
+                        </div>
+                        <div class="col">
+                            @insuree.EmailAddress
+                        </div>
+                        <div class="col">
+                            @insuree.DateOfBirth
+                        </div>
+                        <div class="col">
+                            @insuree.CarYear
+                        </div>
+                        <div class="col">
+                            @insuree.CarModel
+                        </div>
+                        <div class="col">
+                            @insuree.CarModel
+                        </div>
+                        <div class="col">
+                            @insuree.DUI
+                        </div>
+                        <div class="col">
+                            @insuree.SpeedingTicket
+                        </div>
+                        <div class="col">
+                            @insuree.CoverageType
+                        </div>
+                        <div class="col">
+                            @insuree.Quote
+                        </div>
+                    </div>
+                }
+            
+        </div>
+    </div>
+</div>

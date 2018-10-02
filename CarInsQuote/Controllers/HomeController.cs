@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CarInsQuote.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -10,6 +11,8 @@ namespace CarInsQuote.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly string connectionString = @"Data Source=YUI-LT14\TECHACSQLEXPRESS;Initial Catalog=CarInsurance;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+
         public ActionResult Index()
         {
             return View();
@@ -27,8 +30,6 @@ namespace CarInsQuote.Controllers
                 }
             else
             {
-                string connectionString = @"Data Source=YUI-LT14\TECHACSQLEXPRESS;Initial Catalog=CarInsurance;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-
                 string queryString = @"INSERT INTO Insurees (FirstName, LastName, EmailAddress, DateOfBirth,
                                                              CarYear, CarMake, CarModel, DUI, SpeedingTicket, 
                                                              CoverageType) VALUES 
@@ -64,16 +65,44 @@ namespace CarInsQuote.Controllers
                     command.ExecuteNonQuery();
                     connection.Close();
                 }
-                return View("QuotationView");
+                return View("QuotationView"); //Not working at the moment due to not having the Quote included.
             }
-            //USE PIZZA CALCULATION ON GITHUB, PUT IN MODELS FOLDER! 
-            //Create calculate()/CalculateQuote() method, link to Index.cshtml 
-            
-
-
-
-                //Revise SQL Table to include Grand Total field, for Admin usage 
         }
-        
+        public ActionResult Admin()
+        {
+            string queryString = @"SELECT Id, FirstName, LastName, EmailAddress, DateOfBirth,
+                                   CarYear, CarMake, CarModel, DUI, SpeedingTicket, CoverageType FROM Insurees";
+            List<Insuree> quotelist = new List<Insuree>();
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    var customer = new Insuree();
+                    customer.Id = Convert.ToInt32(reader["Id"]);
+                    customer.FirstName = reader["FirstName"].ToString();
+                    customer.LastName = reader["LastName"].ToString();
+                    customer.EmailAddress = reader["EmailAddress"].ToString();
+                    customer.DateOfBirth = Convert.ToInt32(reader["DateOfBirth"]);
+                    customer.CarYear = Convert.ToInt32(reader["CarYear"]);
+                    customer.CarMake = reader["CarMake"].ToString();
+                    customer.CarModel = reader["CarModel"].ToString();
+                    customer.DUI = reader["DUI"].ToString();
+                    customer.SpeedingTicket = Convert.ToInt32(reader["SpeedingTicket"]);
+                    customer.CoverageType = reader["CoverageType"].ToString();
+                    customer.Quote = Convert.ToInt32(reader["Quote"]);
+                    quotelist.Add(customer);
+                }
+            }
+                return View(quotelist);
+        }
+        //USE PIZZA CALCULATION ON GITHUB, PUT IN MODELS FOLDER! 
+        //Create calculate()/CalculateQuote() method, link to Index.cshtml 
     }
 }
