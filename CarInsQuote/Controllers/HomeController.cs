@@ -138,9 +138,12 @@ namespace CarInsQuote.Controllers
                         coverageFactor = runningTotal2 * 0.50;
                     }
 
-                    double grandTotal = runningTotal2 + coverageFactor; 
+                    quote = runningTotal2 + coverageFactor;
+
+                   
                 }
 //==========================================================================================//
+//CODE ABOVE REQUIRES LINK TO INSERT COMMAND BELOW 
 
                 string queryString = @"INSERT INTO Insurees (FirstName, LastName, EmailAddress, DateOfBirth,
                                                              CarYear, CarMake, CarModel, DUI, SpeedingTicket, 
@@ -210,7 +213,7 @@ namespace CarInsQuote.Controllers
                     customer.DUI = reader["DUI"].ToString();
                     customer.SpeedingTicket = Convert.ToInt32(reader["SpeedingTicket"]);
                     customer.CoverageType = reader["CoverageType"].ToString();
-                    customer.Quote = Convert.ToInt32(reader["Quote"]);
+                    customer.Quote = Convert.ToDouble(reader["Quote"]);
                     quotelist.Add(customer);
                 }
             }

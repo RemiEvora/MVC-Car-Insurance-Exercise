@@ -18,6 +18,6 @@ namespace CarInsQuote.Models
         public string DUI { get; set; }
         public int SpeedingTicket { get; set; }
         public string CoverageType { get; set; }
-        public int Quote { get; set; }
+        public double Quote { get; set; }
     }
 }
